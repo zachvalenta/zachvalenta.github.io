@@ -1055,53 +1055,32 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>2014-smith-grasshopper-jungle</title></head><body><article class="markdown-body"><h1 id="grasshopper-jungle">GRASSHOPPER JUNGLE<a class="headerlink" href="#grasshopper-jungle" title="Permanent link"></a></h1>
-<h2 id="quotes">quotes<a class="headerlink" href="#quotes" title="Permanent link"></a></h2>
-<ul>
-<li>friends</li>
-</ul>
-<blockquote>
-<p>“We sat there sitting and smoking. Everything was shitty and confusing. Robby felt terrible.&rdquo; [45]</p>
-<p>“It’s good to have a cigarette with your best friend&rdquo; [96]</p>
-</blockquote>
-<ul>
-<li>history</li>
-</ul>
-<blockquote>
-<p>“The book would be as big as the universe, and it would take multiple countless lifetimes to read. History necessarily had to be an abbreviation.” [67]</p>
-<p>“You could never get everything in a book. Good book are always about everything.&rdquo; [76]</p>
-</blockquote>
-<ul>
-<li>sexuality </li>
-</ul>
-<blockquote>
-<p>“Queer is just a word. Like orange. I know who you are. There’s no one word for that.&rdquo; [120]</p>
-</blockquote>
-<ul>
-<li>youth</li>
-</ul>
-<blockquote>
-<p>And I said, “That was probably one of the top-three most bitchin’ thing I have ever done in my life.&rdquo;</p>
-<p>Robby said, “The only was it could have been better, Porcupine, is if we were on our skateboards when it happened.&rdquo; [376]</p>
-</blockquote>
-<h2 id="plot">plot<a class="headerlink" href="#plot" title="Permanent link"></a></h2>
-<ul>
-<li>day in the life of teenagers in the Middle West</li>
-<li>disaster movie + rom com between Austin and Robby</li>
-<li>heroes win/end of life on earth 😃</li>
-</ul>
-<h2 id="style">style<a class="headerlink" href="#style" title="Permanent link"></a></h2>
-<ul>
-<li>repetition [“history will show”, “shit like that&rdquo;] </li>
-<li>teenage argot</li>
-<li>bodies in food terms (potato peel-colored hair, boxed oatmeal skin) </li>
-<li>long sections w/ many short, named chapters - lotsa line breaks</li>
-</ul>
-<h2 id="structure">structure<a class="headerlink" href="#structure" title="Permanent link"></a></h2>
-<p>straightforward; starts at the beginning, ends at the end</p>
-<h2 id="themes">themes<a class="headerlink" href="#themes" title="Permanent link"></a></h2>
-<ul>
-<li>globalization </li>
-<li>animals (sex, food) </li>
-<li>Robbie, a historian (of family, of his town, relationship btw history and fiction)</li>
-</ul></article></body></html>
+</style><title>localhost-mypy</title></head><body><article class="markdown-body"><h1 id="recurse-center-localhost-talk">RECURSE CENTER &lsquo;LOCALHOST&rsquo; TALK<a class="headerlink" href="#recurse-center-localhost-talk" title="Permanent link"></a></h1>
+<h2 id="mypy-alison-kaptur">MYPY (ALISON KAPTUR)<a class="headerlink" href="#mypy-alison-kaptur" title="Permanent link"></a></h2>
+<div class="codehilite"><pre><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">install: `pip install mypy`</span>
+<span class="sd">use: `mypy &lt;ur_script&gt;.py`</span>
+<span class="sd">docs: https://mypy.readthedocs.io/en/stable/getting_started.html#installing-mypy</span>
+
+<span class="sd">* looks at AST, doesn&#39;t run src</span>
+<span class="sd">* write a bit more code, read a lot less</span>
+<span class="sd">* more code and simpler code (vs. Java tower of abstractions in type graph)</span>
+<span class="sd">* prevents drift btw method sig and impl (esp. after refactor)</span>
+<span class="sd">* seems easier/better to use at the start of a project (although, gradual typing given as a main use case; tbh, idk)</span>
+<span class="sd">* similarties w/ unit testing: don&#39;t need 100% type coverage, similar edge cases</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">greeting</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s">&#39;hello, {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># pass wrong type</span>
+<span class="n">greeting</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;alice&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">p</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span>
+
+<span class="c1"># attempt to return None type</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">p</span><span class="p">()</span>
+</pre></div></article></body></html>

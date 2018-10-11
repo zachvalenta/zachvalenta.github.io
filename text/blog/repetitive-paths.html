@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body {
   max-width: 980px;
   border: 1px solid #ddd;
   outline: 1300px solid #fff;
@@ -1055,49 +1055,68 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>py-package-structure</title></head><body><article class="markdown-body"><h1 id="repetitive-paths-in-python-projects">REPETITIVE PATHS IN PYTHON PROJECTS<a class="headerlink" href="#repetitive-paths-in-python-projects" title="Permanent link"></a></h1>
+</style><title>py-repetitive-paths</title></head><body><article class="markdown-body"><h1 id="repetitive-paths-in-python-projects">REPETITIVE PATHS IN PYTHON PROJECTS<a class="headerlink" href="#repetitive-paths-in-python-projects" title="Permanent link"></a></h1>
 <blockquote>
-<p>Repetitive paths are confusing for both your tools and your developers. Unnecessary nesting doesn’t help anybody (unless they’re nostalgic for monolithic SVN repos). - <a href="https://docs.python-guide.org/writing/structure/#regarding-django-applications">Hitchhiker&rsquo;s Guide to Python</a> </p>
+<p>Repetitive paths are confusing for both your tools and your developers. Unnecessary nesting doesn’t help anybody (unless they’re nostalgic for monolithic SVN repos). - <a href="https://docs.python-guide.org/writing/structure/#regarding-django-applications">Ken Reitz (the guy who wrote the Requests library)</a></p>
+<p>Flat is better than nested. - <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20 - Zen of Python</a></p>
 </blockquote>
 <p><strong>tldr</strong>: Python projects often use repetitive paths, which seems weird and un-Pythonic.</p>
 <hr />
+<h2 id="wtf-is-a-repetitive-path">wtf is a repetitive path?<a class="headerlink" href="#wtf-is-a-repetitive-path" title="Permanent link"></a></h2>
 <p>First, what is a repetitive path?</p>
+<p>Let me show you.</p>
 <p>Go to <a href="https://github.com/pallets/flask">Flask&rsquo;s Github repo</a>. </p>
 <ul>
 <li>name of root directory: <code>flask</code></li>
 <li>name of sub-directory holding source code: <code>flask</code></li>
 </ul>
-<div class="codehilite"><pre><span class="c1"># Flask</span>
+<div class="codehilite"><pre><span class="c1"># root dir: Flask</span>
 ├── docs
-├── flask
+├── flask <span class="c1"># here, too!</span>
 ├── tests
 </pre></div>
 
-<p>Same for <a href="https://github.com/python/mypy">mypy</a>.
-<div class="codehilite"><pre><span class="c1"># mypy</span>
+<p>Repeating &lsquo;flask&rsquo; = repetitive path</p>
+<hr />
+<h2 id="repeat-offenders">repeat offenders<a class="headerlink" href="#repeat-offenders" title="Permanent link"></a></h2>
+<p>Same thing in <a href="https://github.com/python/mypy">mypy</a>:
+<div class="codehilite"><pre><span class="c1"># root dir: mypy</span>
 ├── docs
 ├── misc
-├── mypy
+├── mypy <span class="c1"># we get it!</span>
 </pre></div></p>
-<p><a href="https://github.com/django/django">Django</a> does it, as does <a href="https://github.com/celery/celery">Celery</a>. </p>
+<p><a href="https://github.com/django/django">Django</a> does it, and so does <a href="https://github.com/celery/celery">Celery</a>, <a href="https://github.com/Guake/guake">Guake</a>, <a href="https://github.com/jakubroztocil/httpie">httpie</a>.</p>
 <p>There are some variations on the theme, too. <a href="https://github.com/pypa/pip">pip</a> does this:
-<div class="codehilite"><pre>├── docs
+<div class="codehilite"><pre><span class="c1"># root dir: pip</span>
+├── docs
 ├── src
-│   └── pip
+│   └── pip <span class="c1"># somehow better and worse simultaneously</span>
 ├── tests
 </pre></div></p>
 <p><a href="https://github.com/zzzeek/sqlalchemy">sqlalchemy</a> does this:
-<div class="codehilite"><pre>├── doc
+<div class="codehilite"><pre><span class="c1"># root dir: sqlalchemy</span>
+├── doc
 ├── lib
-│   └── sqlalchemy
+│   └── sqlalchemy <span class="c1"># fine, whatever</span>
 ├── <span class="nb">test</span>
 </pre></div></p>
-<p>There are exceptions. <a href="https://github.com/pytest-dev/pytest">pytest</a> and <a href="https://github.com/python-pillow/Pillow">Pillow</a> both put their source code in, well, <code>src</code>; make sense, no?</p>
-<p>Even weirder, my opening quote comes from Ken Reitz, the guy behind <a href="https://github.com/requests/requests">requests</a>, a project whose repo, you guessed it, looks like this:</p>
-<div class="codehilite"><pre><span class="c1"># requests</span>
+<hr />
+<h2 id="signs-of-hope">signs of hope<a class="headerlink" href="#signs-of-hope" title="Permanent link"></a></h2>
+<p>There are exceptions. <a href="https://github.com/pytest-dev/pytest">pytest</a> and <a href="https://github.com/python-pillow/Pillow">Pillow</a> both put their source code in, well, <code>src</code>. </p>
+<p>Make sense, yes?</p>
+<hr />
+<h2 id="pythonistas-help-me-understand">Pythonistas, help me understand<a class="headerlink" href="#pythonistas-help-me-understand" title="Permanent link"></a></h2>
+<p>Strangest of all:</p>
+<ul>
+<li>my opening quote hating on repetitive paths comes from Ken Reitz</li>
+<li>Ken is the guy behind <a href="https://github.com/requests/requests">requests</a></li>
+<li><code>requests</code> is a project whose repo, you guessed it, looks like this:</li>
+</ul>
+<div class="codehilite"><pre><span class="c1"># root dir: requests</span>
 ├── docs
-├── requests
+├── requests <span class="c1"># up is down, left is right</span>
 ├── tests
 </pre></div>
 
-<p>I want to ask Python people about this. Any potential answer is perhaps too nebulous for StackOverflow and the mob would sweep me away in a wave of downvotes. Maybe IRC&hellip;</p></article></body></html>
+<p>I want to ask Python people about this. </p>
+<p>I&rsquo;d ask StackOverflow but the mob would sweep me away in a wave of downvotes. Maybe IRC&hellip;</p></article></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body {
   max-width: 980px;
   border: 1px solid #ddd;
   outline: 1300px solid #fff;
@@ -1062,20 +1062,29 @@ body .markdown-body
 <li>Linux kernel mailing list</li>
 <li>there&rsquo;s an IRC channel called kernel-newbies (apparently people are still assholes here though)</li>
 <li>how to learn: pick a system call and go from there</li>
-<li>search kernel: livegrep.com -&gt; try this w/ chmod</li>
-<li>search macOS kernel: opensource.apple.com</li>
+<li>search kernel: <a href="https://livegrep.com/search/linux">livegrep</a> -&gt; try this w/ <code>chmod</code></li>
 <li>stay up-to-date: Linux Weekly News, Linux kernel mailing list</li>
 </ul>
-<p><strong>the kernel, there when you Google</strong></p>
-<p>when you type &lsquo;google.com&rsquo;, kernel code runs for typing the address (keyboard interrupt to figure out which key), handling network packets (implements TCP/IP), writing history files to disk (knows you have HD and how to write to it), allocating memory (making sure processes can&rsquo;t see what&rsquo;s going on with each other), talking w/ graphics card</p>
+<p><strong>&lsquo;what happens when&rsquo;, kernel edition</strong></p>
+<p>when you type <code>google.com</code>, kernel code runs </p>
+<ul>
+<li>for typing the address: keyboard interrupt to figure out which key</li>
+<li>handling network packets: implements TCP/IP</li>
+<li>writing history files to disk: knows you have HD and how to write to it</li>
+<li>allocating memory: makes sure processes can&rsquo;t see what&rsquo;s going on with each other</li>
+<li>talking to graphics card</li>
+</ul>
 <p><strong>Julia herself</strong></p>
-<p>Julia has a strong personality as a writer and even more so as a speaker. If the topic were politics or sports or another topic with a low bar to entry, I wonder that she might be a divise figure. The topic, however, is systems programming, so hopefully her outright mastery/enthusiasm means people let her be herself.</p>
-<p><strong>miscellaneous</strong></p>
-<p>sys call: API for os</p>
-<p>normal debugging (know the language, look at src, add print statements) vs. debugging w/ strace (&lsquo;these are the system calls your program is making&rsquo;)</p>
+<p>Julia has a strong personality as a writer and even more so as a speaker. If the topic were politics or sports or another topic with a low bar to entry, I wonder that she might be a divisive figure. The topic, however, is systems programming, so hopefully her outright mastery/enthusiasm means people let her be herself.</p>
+<p><strong>strace</strong></p>
+<p>❌ normal debugging: know the language, look at src, print statements/debugger</p>
+<p>✅ <code>strace</code> debugging: &lsquo;these are the system calls your program is making&rsquo;</p>
 <p>📝 don&rsquo;t run strace on production processes (or anything that needs to run at normal speed)</p>
-<p>Strange Loop looks awesome</p>
-<p>track L1 cache misses w/ <code>perf</code></p>
-<p>dig into the <code>/proc</code> thing</p>
-<p>line at 24:05 is goddamn gold</p>
-<p>26:45 &ldquo;if I press the letter &lsquo;j&rsquo;, it understands how that works, and I press other letters, it understands how that works. so it understands how a keyboard works. that took 3 weeks.&rdquo;</p></article></body></html>
+<p><strong>miscellaneous</strong></p>
+<p>sys call = API for os</p>
+<p><a href="https://thestrangeloop.com/">Strange Loop conference</a> looks awesome</p>
+<p>track cache misses w/ <code>perf</code></p>
+<p>@ 26:45 </p>
+<blockquote>
+<p>&ldquo;If I press the letter &lsquo;j&rsquo;, it understands how that works, and I press other letters, it understands how that works. So it understands how a keyboard works. That took 3 weeks.&rdquo;</p>
+</blockquote></article></body></html>

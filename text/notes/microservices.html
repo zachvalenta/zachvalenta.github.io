@@ -1055,19 +1055,19 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>microservices</title></head><body><article class="markdown-body"><h1 id="microservices">MICROSERVICES<a class="headerlink" href="#microservices" title="Permanent link"></a></h1>
+</style><title>2018-feval-microservices</title></head><body><article class="markdown-body"><h1 id="microservices">MICROSERVICES<a class="headerlink" href="#microservices" title="Permanent link"></a></h1>
 <p>tldr: &ldquo;microservices - not a free lunch&rdquo;</p>
 <p>📰 <a href="https://www.feval.fr/posts/microservices/">https://www.feval.fr/posts/microservices/</a> &ndash;&gt; read article for the full dish, it&rsquo;s really good</p>
 <p><strong>benefits of microservices and how to get them</strong></p>
 <blockquote>
 <p>resiliency, HA, low coupling, agility</p>
 <p>Most of what a microservice architecture brings can also be achieved with other solutions&hellip;a carefully planned <strong>application</strong> architecture</p>
-<p>Containers and infrastructure as code can also be used with or without a microservice architecture. And in fact, they tend to be simpler to implement, since the networking is straight forward and the number of configurations is less important. They still bring the benefits of constructing and destroying environments at will, and facilitating the creation of development environments.</p>
+<p><strong>Containers and infrastructure as code can also be used with or without a microservice architecture</strong>. And in fact, they tend to be simpler to implement, since the networking is straight forward and the number of configurations is less important. They still bring the benefits of constructing and destroying environments at will, and facilitating the creation of development environments.</p>
 <p>Build automation, and frequent releases, can be achieved through increased focus and reduced WIP, small batches, atomic change flow, and reduced coordination.</p>
 </blockquote>
 <p><strong>challenge - coordination</strong></p>
 <blockquote>
-<p>Next thing you know someone will start asking “how do we orchestrate our deployments to manage dependencies between services?”. This is the software version of hell on earth, also called a distributed monolith:</p>
+<p>Next thing you know someone will start asking “how do we orchestrate our deployments to manage dependencies between services?”. <strong>This is the software version of hell on earth, also called a distributed monolith</strong>.</p>
 <p>Each service needs to remain independent, and at the same time guarantee some stability to its consumers. Each time a service modifies its API, its consumers need to be updated as well. But these might not be known, and the upgrade of their clients should not be on the critical path to delivering new features. The direct consequence is that each individual microservice’s API needs to be versioned individually, and old versions need to be maintained for a while. This creates friction to change, which ironically might reduce your agility. <strong>The fact that cross service interaction is API based also removes all those nice refactoring features from your favorite IDE, when you want to refactor across services</strong></p>
 </blockquote>
 <p><strong>challenge - performance</strong></p>
@@ -1078,7 +1078,7 @@ body .markdown-body
 <blockquote>
 <p>They require an organization shift to autonomous, cross-functional teams</p>
 <p>They require a change of process and practices. From a few large releases once in a while, to a lot of small releases often. From ticket-based provisioning, to self-service coded infrastructure.</p>
-<p>The success of a microservice architecture depends on the capacity of organization and process to change, and those are the hardest things to reform.</p>
+<p><strong>The success of a microservice architecture depends on the capacity of organization and process to change, and those are the hardest things to reform.</strong></p>
 <p>Management also needs to be comfortable with refactoring early on, or even starting over if <del>things are really bad</del> the learnings are strong. This is not natural, and is a skill that need to be acquired.</p>
 </blockquote>
 <p><strong>when to use</strong></p>

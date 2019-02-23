@@ -1055,68 +1055,81 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>py-repetitive-paths</title></head><body><article class="markdown-body"><h1 id="repetitive-paths-in-python-projects">REPETITIVE PATHS IN PYTHON PROJECTS<a class="headerlink" href="#repetitive-paths-in-python-projects" title="Permanent link"></a></h1>
-<p>💡<strong>tldr</strong>: Python projects often use repetitive paths, which seems weird and un-Pythonic.</p>
-<blockquote>
-<p>Repetitive paths are confusing for both your tools and your developers. Unnecessary nesting doesn’t help anybody (unless they’re nostalgic for monolithic SVN repos). - <a href="https://docs.python-guide.org/writing/structure/#regarding-django-applications">Ken Reitz (the guy who wrote the Requests library)</a></p>
-<p>Flat is better than nested. - <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20 - Zen of Python</a></p>
-</blockquote>
+</style><title>makefile</title></head><body><article class="markdown-body"><h2 id="makefile-driven-development">Makefile-driven development<a class="headerlink" href="#makefile-driven-development" title="Permanent link"></a></h2>
+<p>💡 idea: good Makefile interface = important development tool</p>
 <hr />
-<h2 id="wtf-is-a-repetitive-path">wtf is a repetitive path?<a class="headerlink" href="#wtf-is-a-repetitive-path" title="Permanent link"></a></h2>
-<p>First, what is a repetitive path?</p>
-<p>Let me show you.</p>
-<p>Go to <a href="https://github.com/pallets/flask">Flask&rsquo;s Github repo</a>. </p>
-<ul>
-<li>name of root directory: <code>flask</code></li>
-<li>name of sub-directory holding source code: <code>flask</code></li>
-</ul>
-<div class="codehilite"><pre><span class="c1"># root dir: Flask</span>
-├── docs
-├── flask <span class="c1"># here, too!</span>
-├── tests
+<p>Today at the office my coworker asked why my UI tests ran so fast.</p>
+<div class="codehilite"><pre>me: we can run them async now.
+coworker: really?
+me: yep. just use this command.
+coworker: oh. didn&#39;t know we had that command.
 </pre></div>
 
-<p>Repeating &lsquo;flask&rsquo; = repetitive path</p>
+<p>✅ <strong>lesson #1</strong>: without an interface, automation tools don&rsquo;t get used</p>
 <hr />
-<h2 id="repeat-offenders">repeat offenders<a class="headerlink" href="#repeat-offenders" title="Permanent link"></a></h2>
-<p>Same thing in <a href="https://github.com/python/mypy">mypy</a>:
-<div class="codehilite"><pre><span class="c1"># root dir: mypy</span>
-├── docs
-├── misc
-├── mypy <span class="c1"># we get it!</span>
-</pre></div></p>
-<p><a href="https://github.com/django/django">Django</a> does it, and so does <a href="https://github.com/celery/celery">Celery</a>, <a href="https://github.com/Guake/guake">Guake</a>, <a href="https://github.com/jakubroztocil/httpie">httpie</a>.</p>
-<p>There are some variations on the theme, too. <a href="https://github.com/pypa/pip">pip</a> does this:
-<div class="codehilite"><pre><span class="c1"># root dir: pip</span>
-├── docs
-├── src
-│   └── pip <span class="c1"># somehow better and worse simultaneously</span>
-├── tests
-</pre></div></p>
-<p><a href="https://github.com/zzzeek/sqlalchemy">sqlalchemy</a> does this:
-<div class="codehilite"><pre><span class="c1"># root dir: sqlalchemy</span>
-├── doc
-├── lib
-│   └── sqlalchemy <span class="c1"># fine, whatever</span>
-├── <span class="nb">test</span>
-</pre></div></p>
-<hr />
-<h2 id="signs-of-hope">signs of hope<a class="headerlink" href="#signs-of-hope" title="Permanent link"></a></h2>
-<p>There are exceptions. <a href="https://github.com/pytest-dev/pytest">pytest</a> and <a href="https://github.com/python-pillow/Pillow">Pillow</a> both put their source code in, well, <code>src</code>. </p>
-<p>Make sense, yes?</p>
-<hr />
-<h2 id="pythonistas-help-me-understand">Pythonistas, help me understand<a class="headerlink" href="#pythonistas-help-me-understand" title="Permanent link"></a></h2>
-<p>Strangest of all:</p>
-<ul>
-<li>my opening quote hating on repetitive paths comes from Ken Reitz</li>
-<li>Ken is the guy behind <a href="https://github.com/requests/requests">requests</a></li>
-<li><code>requests</code> is a project whose repo, you guessed it, looks like this:</li>
-</ul>
-<div class="codehilite"><pre><span class="c1"># root dir: requests</span>
-├── docs
-├── requests <span class="c1"># up is down, left is right</span>
-├── tests
+<p>Here&rsquo;s how I imagine the interaction between the <code>README.md</code> and its neighbors:</p>
+<div class="codehilite"><pre>              x    
+            x   x
+          x       x
+        x  Makefile x
+      xxxxxxxxxxxxxxxxx
+    x     README.md     x 
+  xxxxxxxxxxxxxxxxxxxxxxxx
+x        source code        x 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                      
 </pre></div>
 
-<p>I want to ask Python people about this. </p>
-<p>I&rsquo;d ask StackOverflow but the mob would sweep me away in a wave of downvotes. Maybe IRC&hellip;</p></article></body></html>
+<ul>
+<li><strong>source code</strong>: the actual implementation</li>
+<li><strong><code>README.MD</code></strong>: meta (why does this project exist? where to open issues?), operational details, how to build</li>
+<li><strong><code>Makefile</code></strong>: buncha commands to pull the levers I would conceivably need to pull in order to perform normal interactions with the app: </li>
+</ul>
+<p>The <code>README</code> is typically used for day-1 items (how to I get this thing up and running?) and more meta concerns (why should I use this package in the first place?)</p>
+<p>As a result, the <code>README</code> rots quickly unless you&rsquo;re onboarding new devs very frequently.</p>
+<p>If you want to keep track of how to use your project on a daily basis, the best option I&rsquo;ve found is to use a <code>Makefile</code>.</p>
+<p>✅ <strong>lesson #2</strong>: have a <code>Makefile</code>!</p>
+<hr />
+<p>Back to my coworker.</p>
+<p>Why didn&rsquo;t he just look at the <code>Makefile</code>?</p>
+<p>Because the <code>Makefile</code> had a bad user interface.</p>
+<p>Here&rsquo;s an interaction with a typical <code>Makefile</code>.</p>
+<div class="codehilite"><pre>targetName:
+    long cryptic cmd --mystery_arg<span class="o">=</span><span class="s1">&#39;foo&#39;</span> --hmm_whats_this <span class="o">&amp;&amp;</span> do_this_too
+</pre></div>
+
+<p>Even if you understand each command perfectly, you may not understand the context of when/why you&rsquo;d run it.</p>
+<p>✅ <strong>lesson #3</strong>: don&rsquo;t let your <code>Makefile</code> user interface suck!</p>
+<hr />
+<p>Now, the fun part: a solution!</p>
+<p>Just add a short table of contents:
+<div class="codehilite"><pre><span class="c"># Makefile</span>
+<span class="nf">help</span><span class="o">:</span>
+    @echo
+    @echo <span class="s2">&quot;📊 CODE QUALITY&quot;</span>
+    @echo
+    @echo <span class="s2">&quot;lint:    lint using flake8&quot;</span>
+    @echo <span class="s2">&quot;test:    run unit tests, view basic coverage report in terminal&quot;</span>
+    @echo <span class="s2">&quot;cov:     view HTML coverage report in browser&quot;</span>
+    @echo
+    @echo <span class="s2">&quot;📦 DEPENDENCIES&quot;</span>
+    @echo
+    @echo <span class="s2">&quot;pipfr:   freeze dependencies into requirements.txt&quot;</span>
+    @echo <span class="s2">&quot;pipin:   install dependencies from requirements.txt&quot;</span>
+    @echo <span class="s2">&quot;piprs:   remove any installed pkg *not* in requirements.txt&quot;</span>
+    @echo
+</pre></div></p>
+<p>Then, next time you need to recall a workflow, just run <code>make help</code>:</p>
+<div class="codehilite"><pre>📊 CODE QUALITY
+
+lint:    lint using flake8
+test:    run unit tests, view basic coverage report in terminal
+cov:     view HTML coverage report in browser
+
+📦 DEPENDENCIES
+
+pipfr:   freeze dependencies into requirements.txt
+pipin:   install dependencies from requirements.txt
+piprs:   remove any installed pkg *not* in requirements.txt
+</pre></div>
+
+<p>This is what I&rsquo;ve done lately and it&rsquo;s been working for me.</p></article></body></html>

@@ -1,5 +1,6 @@
 body {
-	padding: 50px; 
-	font-size: 21px;
-	line-height: 1.58;
+    /* https://jrl.ninja/etc/1/ */
+    max-width: 38rem;
+    padding: 2rem;
+    margin: auto;
 }

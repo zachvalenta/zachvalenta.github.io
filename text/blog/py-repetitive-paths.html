@@ -1,0 +1,64 @@
+<link href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.css" rel="stylesheet"/>
+<h1>REPETITIVE PATHS IN PYTHON PROJECTS</h1>
+<p>💡<strong>tldr</strong>: Python projects often use repetitive paths, which seems weird and un-Pythonic.</p>
+<blockquote>
+<p>Repetitive paths are confusing for both your tools and your developers. Unnecessary nesting doesn’t help anybody (unless they’re nostalgic for monolithic SVN repos). - <a href="https://docs.python-guide.org/writing/structure/#regarding-django-applications">Ken Reitz (the guy who wrote the Requests library)</a></p>
+<p>Flat is better than nested. - <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20 - Zen of Python</a></p>
+</blockquote>
+<hr/>
+<h2>wtf is a repetitive path?</h2>
+<p>First, what is a repetitive path?</p>
+<p>Let me show you.</p>
+<p>Go to <a href="https://github.com/pallets/flask">Flask's Github repo</a>. </p>
+<ul>
+<li>name of root directory: <code>flask</code></li>
+<li>name of sub-directory holding source code: <code>flask</code></li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="c1"># root dir: Flask</span>
+├── docs
+├── flask <span class="c1"># here, too!</span>
+├── tests
+</code></pre></div>
+<p>Repeating 'flask' = repetitive path</p>
+<hr/>
+<h2>repeat offenders</h2>
+<p>Same thing in <a href="https://github.com/python/mypy">mypy</a>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># root dir: mypy</span>
+├── docs
+├── misc
+├── mypy <span class="c1"># we get it!</span>
+</code></pre></div>
+<p><a href="https://github.com/django/django">Django</a> does it, and so does <a href="https://github.com/celery/celery">Celery</a>, <a href="https://github.com/Guake/guake">Guake</a>, <a href="https://github.com/jakubroztocil/httpie">httpie</a>.</p>
+<p>There are some variations on the theme, too. <a href="https://github.com/pypa/pip">pip</a> does this:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># root dir: pip</span>
+├── docs
+├── src
+│   └── pip <span class="c1"># somehow better and worse simultaneously</span>
+├── tests
+</code></pre></div>
+<p><a href="https://github.com/zzzeek/sqlalchemy">sqlalchemy</a> does this:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># root dir: sqlalchemy</span>
+├── doc
+├── lib
+│   └── sqlalchemy <span class="c1"># fine, whatever</span>
+├── <span class="nb">test</span>
+</code></pre></div>
+<hr/>
+<h2>signs of hope</h2>
+<p>There are exceptions. <a href="https://github.com/pytest-dev/pytest">pytest</a> and <a href="https://github.com/python-pillow/Pillow">Pillow</a> both put their source code in, well, <code>src</code>. </p>
+<p>Make sense, yes?</p>
+<hr/>
+<h2>Pythonistas, help me understand</h2>
+<p>Strangest of all:</p>
+<ul>
+<li>my opening quote hating on repetitive paths comes from Ken Reitz</li>
+<li>Ken is the guy behind <a href="https://github.com/requests/requests">requests</a></li>
+<li><code>requests</code> is a project whose repo, you guessed it, looks like this:</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="c1"># root dir: requests</span>
+├── docs
+├── requests <span class="c1"># up is down, left is right</span>
+├── tests
+</code></pre></div>
+<p>I want to ask Python people about this. </p>
+<p>I'd ask StackOverflow but the mob would sweep me away in a wave of downvotes. Maybe IRC...</p>

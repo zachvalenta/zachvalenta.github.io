@@ -1,0 +1,29 @@
+<link href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.css" rel="stylesheet"/>
+<h1>MY DEBUG CHECKLIST</h1>
+<p>In the spirit of Atul Gawade's <a href="https://www.amazon.com/Checklist-Manifesto-How-Things-Right/dp/0312430000">The Checklist Manifesto</a>, here are some things I review when I get stuck coding.</p>
+<h2>principles</h2>
+<p>The hardest part of debugging (esp. if the error is in the way of doing something that actually seems intellectually challenging) is sticking to the checklist. 'Sticking to the checklist' is the ur-item of the checklist.</p>
+<blockquote>
+<p>"Make it a habit to examine error messages when something goes wrong. <a href="https://selectstarsql.com/beazley.html">Avoid debugging by gut feel or trial and error</a>."</p>
+<p>"The first step when you are debugging your code is to <a href="https://docs.python-guide.org/writing/tests/#testing-your-code">write a new test pinpointing the bug.</a>"</p>
+</blockquote>
+<h2>first steps</h2>
+<ul>
+<li>code from error message + Stack Overflow</li>
+<li>checkout develop branch or previous working commit</li>
+<li>double check README</li>
+<li>rebuild code</li>
+<li>reclone repo</li>
+<li>environment variables?</li>
+</ul>
+<h2>more desperate</h2>
+<ul>
+<li>logs (timely? accurate? what's missed?)</li>
+<li>anything left in environment from previous branch (db migration, dependencies)?</li>
+<li>command run from right dir?</li>
+<li>state: when is it being updated? all at once?</li>
+<li>any processes already on port? <code>lsof -i :&lt;port&gt;</code></li>
+<li>client version? server version?</li>
+<li>potential conflicts between deps (or deps deps) and something else on your machine?</li>
+<li><a href="https://jvns.ca/blog/2018/09/01/learning-skills-you-can-practice/">what do you <em>actually</em> know?</a></li>
+</ul>

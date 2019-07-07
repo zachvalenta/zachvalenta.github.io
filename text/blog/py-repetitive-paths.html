@@ -1,12 +1,12 @@
 <link href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.css" rel="stylesheet"/>
-<h1>REPETITIVE PATHS IN PYTHON PROJECTS</h1>
+<h2>REPETITIVE PATHS IN PYTHON PROJECTS</h2>
+<hr/>
 <p>💡<strong>tldr</strong>: Python projects often use repetitive paths, which seems weird and un-Pythonic.</p>
 <blockquote>
 <p>Repetitive paths are confusing for both your tools and your developers. Unnecessary nesting doesn’t help anybody (unless they’re nostalgic for monolithic SVN repos). - <a href="https://docs.python-guide.org/writing/structure/#regarding-django-applications">Ken Reitz (the guy who wrote the Requests library)</a></p>
 <p>Flat is better than nested. - <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20 - Zen of Python</a></p>
 </blockquote>
-<hr/>
-<h2>wtf is a repetitive path?</h2>
+<h3>wtf is a repetitive path?</h3>
 <p>First, what is a repetitive path?</p>
 <p>Let me show you.</p>
 <p>Go to <a href="https://github.com/pallets/flask">Flask's Github repo</a>. </p>
@@ -20,8 +20,7 @@
 ├── tests
 </code></pre></div>
 <p>Repeating 'flask' = repetitive path</p>
-<hr/>
-<h2>repeat offenders</h2>
+<h3>repeat offenders</h3>
 <p>Same thing in <a href="https://github.com/python/mypy">mypy</a>:</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># root dir: mypy</span>
 ├── docs
@@ -43,12 +42,10 @@
 │   └── sqlalchemy <span class="c1"># fine, whatever</span>
 ├── <span class="nb">test</span>
 </code></pre></div>
-<hr/>
-<h2>signs of hope</h2>
+<h3>signs of hope</h3>
 <p>There are exceptions. <a href="https://github.com/pytest-dev/pytest">pytest</a> and <a href="https://github.com/python-pillow/Pillow">Pillow</a> both put their source code in, well, <code>src</code>. </p>
 <p>Make sense, yes?</p>
-<hr/>
-<h2>Pythonistas, help me understand</h2>
+<h3>Pythonistas, help me understand</h3>
 <p>Strangest of all:</p>
 <ul>
 <li>my opening quote hating on repetitive paths comes from Ken Reitz</li>

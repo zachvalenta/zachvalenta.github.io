@@ -1,74 +1,21 @@
 <link href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.css" rel="stylesheet"/>
 <h2>DX (dev experience) should be a thing</h2>
 <hr/>
-<p>Today at the office my coworker asked why my UI tests ran so fast.</p>
-<div class="codehilite"><pre><span></span><code>me: we can run them async now.
-coworker: really?
-me: yep. just use this command.
-coworker: oh. didn't know we had that command.
-</code></pre></div>
-<p>✅ <strong>lesson #1</strong>: without an interface, automation tools don't get used</p>
-<hr/>
-<p>Here's how I imagine the interaction between the <code>README.md</code> and its neighbors:</p>
-<div class="codehilite"><pre><span></span><code>              x    
-            x   x
-          x       x
-        x  Makefile x
-      xxxxxxxxxxxxxxxxx
-    x     README.md     x 
-  xxxxxxxxxxxxxxxxxxxxxxxx
-x        source code        x 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                      
-</code></pre></div>
+<p><strong>What is DX?</strong></p>
+<p>Dev experience</p>
+<p><strong>Is this like UX (user experience)?</strong></p>
+<p>Yes.</p>
+<p><strong>Why should I care about DX?</strong></p>
+<p>For the same reasons you care about UX</p>
+<p><strong>How to have good DX?</strong></p>
+<p>Use 'immediate files'</p>
+<p><strong>What are immediate files?</strong></p>
+<blockquote>
+<p>If you’re browsing a directory full of source code, it’s useful to see the documentation or build script that “kicks off” the entire project. This is why exa calls them <a href="https://the.exa.website/features/colours">immediate files</a> — they’re meant to be the first file you read or run. </p>
+</blockquote>
+<p><a href="https://github.com/ogham/exa/blob/4c73a3353025f09410301af5d7e8c8b738db92a5/src/info/filetype.rs#L22">Examples include</a>:</p>
 <ul>
-<li><strong>source code</strong>: the actual implementation</li>
-<li><strong><code>README.MD</code></strong>: how to build, operational details (where to get help, open issues) meta (why does this project exist?)</li>
-<li><strong><code>Makefile</code></strong>: commands to pull the levers I would conceivably need to pull in order to perform normal interactions with the app</li>
+<li><code>README.md</code></li>
+<li><code>Makefile</code></li>
+<li>something language-specific like <code>build.gradle</code> or <code>Rakefile</code></li>
 </ul>
-<p>The <code>README</code> is typically used for day-1 items (how to I get this thing up and running?) and more meta concerns (why should I use this package in the first place?)</p>
-<p>As a result, the <code>README</code> rots quickly unless you're onboarding new devs very frequently.</p>
-<p>If you want to keep track of how to use your project on a daily basis, the best option I've found is to use a <code>Makefile</code>.</p>
-<p>✅ <strong>lesson #2</strong>: have a <code>Makefile</code>!</p>
-<hr/>
-<p>Back to my coworker.</p>
-<p>Why didn't he just look at the <code>Makefile</code>?</p>
-<p>Because the <code>Makefile</code> had a bad user interface.</p>
-<p>Here's an interaction with a typical <code>Makefile</code>.</p>
-<div class="codehilite"><pre><span></span><code>targetName:
-    long cryptic cmd --mystery_arg<span class="o">=</span><span class="s1">'foo'</span> --hmm_whats_this <span class="o">&amp;&amp;</span> do_this_too
-</code></pre></div>
-<p>Even if you understand each command perfectly, you may not understand the context of when/why you'd run it.</p>
-<p>✅ <strong>lesson #3</strong>: don't let your <code>Makefile</code> user interface suck!</p>
-<hr/>
-<p>Now, the fun part: a solution!</p>
-<p>Just add a short table of contents:</p>
-<div class="codehilite"><pre><span></span><code><span class="c"># Makefile</span>
-<span class="nf">help</span><span class="o">:</span>
-    @echo
-    @echo <span class="s2">"📊 CODE QUALITY"</span>
-    @echo
-    @echo <span class="s2">"lint:    lint using flake8"</span>
-    @echo <span class="s2">"test:    run unit tests, view basic coverage report in terminal"</span>
-    @echo <span class="s2">"cov:     view HTML coverage report in browser"</span>
-    @echo
-    @echo <span class="s2">"📦 DEPENDENCIES"</span>
-    @echo
-    @echo <span class="s2">"pipfr:   freeze dependencies into requirements.txt"</span>
-    @echo <span class="s2">"pipin:   install dependencies from requirements.txt"</span>
-    @echo <span class="s2">"piprs:   remove any installed pkg *not* in requirements.txt"</span>
-    @echo
-</code></pre></div>
-<p>Then, next time you need to recall a workflow, just run <code>make help</code>:</p>
-<pre><code>📊 CODE QUALITY
-
-lint:    lint using flake8
-test:    run unit tests, view basic coverage report in terminal
-cov:     view HTML coverage report in browser
-
-📦 DEPENDENCIES
-
-pipfr:   freeze dependencies into requirements.txt
-pipin:   install dependencies from requirements.txt
-piprs:   remove any installed pkg *not* in requirements.txt
-</code></pre>
-<p>This is what I've done lately and it's been working for me.</p>

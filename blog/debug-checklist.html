@@ -1,30 +1,35 @@
 <link href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.css" rel="stylesheet"/>
 <h2>Have a debug checklist</h2>
 <hr/>
-<p>In the spirit of Atul Gawade's <a href="https://www.amazon.com/Checklist-Manifesto-How-Things-Right/dp/0312430000">The Checklist Manifesto</a>, here are some things I review when I get stuck coding.</p>
-<h3>principles</h3>
-<p>The hardest part of debugging (esp. if the error is in the way of doing something that actually seems intellectually challenging) is sticking to the checklist. 'Sticking to the checklist' is the ur-item of the checklist.</p>
+<h3>make your own checklist</h3>
+<p>Atul Gawade's <a href="https://www.amazon.com/Checklist-Manifesto-How-Things-Right/dp/0312430000">The Checklist Manifesto</a> teaches us: </p>
+<ul>
+<li>checklists are incredibly useful</li>
+<li>the hardest part of a checklist is actually sticking to the checklist</li>
+</ul>
+<p>The first step to addressing both of those points is to actually have a checklist. For whatever reason, I've never seen another debug according to an explicit checklist, but I think it might be worthwhile. Here's my attempt at making one for myself.</p>
+<h3>my checklist</h3>
+<ul>
+<li>read the error message, read the code</li>
+<li>if stuck, check out Duck Duck Go and Stack Overflow</li>
+<li>if still stuck, get back to the previous working state by:
+<ul>
+<li>rebuilding the code</li>
+<li>checking out the develop branch or a previous working commit</li>
+<li>recloning the repo</li>
+</ul></li>
+<li>some things to double check:
+<ul>
+<li>are there any environment variables that need to be set? any env var incorrectly set?</li>
+<li>are the logs masking anything?</li>
+<li>anything left in environment from a previous branch (db migration, dependencies)?</li>
+<li>anything wonky w/ dependencies or their versions?</li>
+</ul></li>
+</ul>
+<p>If things get really dire, I take a walk and think about something else and then, when I'm back at my desk, ask myself <a href="https://jvns.ca/blog/2018/09/01/learning-skills-you-can-practice/">what do I <em>actually</em> know?</a></p>
+<h3>other advice</h3>
+<p>Another benefit of having a checklist is, if you need to enroll the help of a coworker or collaborator, you've got a list of things you've tried and the results of those tries. Plus, you've proof that you put effort and consideration into solving the problem on your own and therefore respect their time.</p>
+<p>p.s. Julia Evans has a bunch of <a href="https://jvns.ca/blog/2019/06/23/a-few-debugging-resources/">other debugging advice</a> that you should check out.</p>
 <blockquote>
 <p>"Make it a habit to examine error messages when something goes wrong. <a href="https://selectstarsql.com/beazley.html">Avoid debugging by gut feel or trial and error</a>."</p>
-<p>"The first step when you are debugging your code is to <a href="https://docs.python-guide.org/writing/tests/#testing-your-code">write a new test pinpointing the bug.</a>"</p>
 </blockquote>
-<h3>first steps</h3>
-<ul>
-<li>code from error message + Stack Overflow</li>
-<li>checkout develop branch or previous working commit</li>
-<li>double check README</li>
-<li>rebuild code</li>
-<li>reclone repo</li>
-<li>environment variables?</li>
-</ul>
-<h3>more desperate</h3>
-<ul>
-<li>logs (timely? accurate? what's missed?)</li>
-<li>anything left in environment from previous branch (db migration, dependencies)?</li>
-<li>command run from right dir?</li>
-<li>state: when is it being updated? all at once?</li>
-<li>any processes already on port? <code>lsof -i :&lt;port&gt;</code></li>
-<li>client version? server version?</li>
-<li>potential conflicts between deps (or deps deps) and something else on your machine?</li>
-<li><a href="https://jvns.ca/blog/2018/09/01/learning-skills-you-can-practice/">what do you <em>actually</em> know?</a></li>
-</ul>

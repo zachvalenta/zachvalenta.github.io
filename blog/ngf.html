@@ -1,0 +1,201 @@
+<link href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.css" rel="stylesheet"/>
+<h2>set up Nginx and Gunicorn on macOS</h2>
+<p>Most guides show how to set up servers on a Linux box (which makes sense) but macOS also works if you don't have a Linux box handy.</p>
+<p>This article is just the <code>README.md</code> to <a href="https://github.com/zachvalenta/nginx-wsgi">the repo where everything is implemented</a>, so go there if you'd like to follow along. I've also posted this on <a href="https://stackoverflow.com/a/54298517">Stack Overflow</a> in very condensed form.</p>
+<h3>WHAT WE'LL DO</h3>
+<pre><code>                +---------------+
+                |    Nginx      |
+                |               |
+                |               |
+                +---------------+
+                       X
+                       X
+                       X
+                       X
+        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        X                            X
+        X                            X
+        X                            X
++----------------+                   X
+|    gunicorn    |                   X
+|                |                   X
+|                |             +----------------+
++----------------+             |    static      |
+        X                      |    assets      |
+        X                      |                |
++----------------+             +----------------+
+|    Flask       |
+|                |
+|                |
++----------------+
+</code></pre>
+<h3>THINGS WE'LL USE</h3>
+<ul>
+<li>packages from Homebrew: <code>nginx</code> and <code>httpie</code></li>
+<li>Python 3</li>
+<li>Makefile for our commands (to understand what all the commands do, just run <code>make help</code>)</li>
+<li>Flask for the webserver (our gunicorn and Nginx config should hold true for any WSGI server -&gt; if you try this with Django, Pyramid, et al. and run into a problem, just open an issue and we'll figure it out!)</li>
+</ul>
+<h3>STEP 1: NGINX ➡️ STATIC ASSETS</h3>
+<pre><code>                +---------------+
+                |    Nginx      |
+                |               |
+                |               |
+                +---------------+
+                       X
+                       X
+                       X
+                       X
+                       XXXXXXXXXXXXXXX
+                                     X
+                                     X
+                                     X
+                                     X
+                                     X
+                                     X
+                               +----------------+
+                               |    static      |
+                               |    assets      |
+                               |                |
+                               +----------------+
+
+</code></pre>
+<ul>
+<li>download Nginx using Homebrew: <code>brew install nginx</code></li>
+<li>start Nginx: <code>make ng-serve</code></li>
+<li>hit Nginx: <code>make ng-hit</code> to hit our Nginx server, which will return its default welcome page</li>
+</ul>
+<div class="codehilite"><pre><span></span><code>$ make ng-hit
+
+http http://127.0.0.1:8080
+HTTP/1.1 <span class="m">200</span> OK
+<span class="c1"># other output</span>
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+</code></pre></div>
+<ul>
+<li>next, go update the Nginx configuration file (<code>/etc/nginx/nginx.conf</code>) to point at our repo's static assets</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="gd">- location / {</span>
+<span class="gi">+ location /static {</span>
+<span class="gd">-   root   html;</span>
+<span class="gi">+   root   path/to/your/nginx-wsgi;</span>
+<span class="gd">-   index  index.html index.htm;</span>
+<span class="gi">+   index  my-asset.html;</span>
+}
+</code></pre></div>
+<ul>
+<li>reload Nginx so it knows about our updated config: <code>make ng-up</code></li>
+<li>hit Nginx at the <code>static</code> route to validate it's serving our bespoke HTML 😄: <code>make ng-static</code></li>
+</ul>
+<div class="codehilite"><pre><span></span><code>$ make ng-static
+
+http http://127.0.0.1:8080/static/
+HTTP/1.1 <span class="m">200</span> OK
+<span class="c1"># other output</span>
+&lt;h1&gt;Nginx is serving my-asset.html!&lt;/h1&gt;
+</code></pre></div>
+<h3>STEP 2: GUNICORN ➡️ FLASK</h3>
+<pre><code>+----------------+                   
+|    gunicorn    |                   
+|                |                   
+|                |             
++----------------+             
+        X                      
+        X                      
++----------------+             
+|    Flask       |
+|                |
+|                |
++----------------+
+</code></pre>
+<ul>
+<li><a href="https://realpython.com/python-virtual-environments-a-primer/">make a virtual environment and activate it</a>, then install the dependencies: <code>make pipin</code></li>
+<li>start Flask: <code>make flask-serve</code></li>
+<li>hit Flask on port 5000: <code>make flask-hit</code></li>
+</ul>
+<div class="codehilite"><pre><span></span><code>$ make flask-hit
+
+http http://127.0.0.1:5000
+&lt;h1&gt;Flask running!&lt;/h1&gt;
+</code></pre></div>
+<ul>
+<li>start gunicorn: <code>make guni-serve</code></li>
+<li>hit gunicorn on port 8000 to validate that it passes the request to Flask on port 5000: <code>make guni-hit</code></li>
+</ul>
+<div class="codehilite"><pre><span></span><code>$ make guni-hit
+
+http http://127.0.0.1:8000
+&lt;h1&gt;Flask running!&lt;/h1&gt;
+</code></pre></div>
+<h3>STEP 3: NGINX ➡️ GUNICORN</h3>
+<pre><code>                +---------------+
+                |    Nginx      |
+                |               |
+                |               |
+                +---------------+
+                       X
+                       X
+                       X
+                       X
+        XXXXXXXXXXXXXXXXX
+        X                            
+        X                            
+        X                            
++----------------+                   
+|    gunicorn    |                   
+|                |                   
+|                |             
++----------------+             
+</code></pre>
+<ul>
+<li>update the Nginx conf again, this time to pass requests to gunicorn</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="gi">+ location / {</span>
+<span class="gi">+     proxy_pass http://127.0.0.1:8000;</span>
+<span class="gi">+ }</span>
+</code></pre></div>
+<ul>
+<li>reload Nginx so it knows about our updated config: <code>make ng-up</code></li>
+<li>hit Nginx: <code>make ng-hit</code> -&gt; this time, instead of the default Nginx page, we'll see that the request passes from Nginx to gunicorn and finally to Flask</li>
+</ul>
+<div class="codehilite"><pre><span></span><code>$ make ng-hit
+
+http http://127.0.0.1:8080
+HTTP/1.1 <span class="m">200</span> OK
+<span class="c1"># other output</span>
+&lt;h1&gt;Flask running!&lt;/h1&gt;
+</code></pre></div>
+<hr/>
+<p>Now, everything is wired together:</p>
+<pre><code>                +---------------+
+                |    Nginx      |
+                |               |
+                |               |
+                +---------------+
+                       X
+                       X
+                       X
+                       X
+        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        X                            X
+        X                            X
+        X                            X
++----------------+                   X
+|    gunicorn    |                   X
+|                |                   X
+|                |             +----------------+
++----------------+             |    static      |
+        X                      |    assets      |
+        X                      |                |
++----------------+             +----------------+
+|    Flask       |
+|                |
+|                |
++----------------+
+</code></pre>
+<p>This guide is just to get you up-and-running. For more explanation, here are some articles that helped me:</p>
+<ul>
+<li>http://cheng.logdown.com/posts/2015/01/29/deploy-django-nginx-gunicorn-on-mac-osx-part-2</li>
+<li>http://honza.ca/2011/05/deploying-django-with-nginx-and-gunicorn</li>
+<li>https://www.patricksoftwareblog.com/how-to-configure-nginx-for-a-flask-web-application/</li>
+</ul>

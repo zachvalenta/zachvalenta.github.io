@@ -3,30 +3,30 @@
 <hr/>
 <p><strong>What is DX?</strong></p>
 <p>'DX' means 'dev experience'.</p>
-<p><strong>Why are you coining a neologism?</strong></p>
-<p>Developers lack a succinct and memorable way to characterize a software library's ease of use.</p>
+<p><strong>Why coin a neologism?</strong></p>
+<p>Developers lack a succinct way to characterize a software library's ease of use.</p>
 <p><strong>Is this like UX (user experience)?</strong></p>
 <p>Yes.</p>
 <p><strong>Why should I care about DX?</strong></p>
-<p>For the same reasons you care about UX. </p>
-<p>If your project is unpleasant to use, other developers won't use it (unless they have to for work; congratulations?).</p>
+<p>For the same reasons you care about UX: if your project is unpleasant to use, other developers won't use it.</p>
 <p><strong>How to have good DX?</strong></p>
 <p>Use 'immediate files'.</p>
 <p><strong>What are immediate files?</strong></p>
 <blockquote>
 <p>If you’re browsing a directory full of source code, it’s useful to see the documentation or build script that “kicks off” the entire project. This is why <a href="https://the.exa.website">exa</a> calls them <a href="https://the.exa.website/features/colours">immediate files</a> — they’re meant to be the first file you read or run. </p>
 </blockquote>
-<p><strong>What are some examples of immediate files?</strong></p>
+<p><strong>What files are immediate files?</strong></p>
 <p><a href="https://github.com/ogham/exa/blob/4c73a3353025f09410301af5d7e8c8b738db92a5/src/info/filetype.rs#L22">Examples include</a>:</p>
 <ul>
 <li><code>README.md</code></li>
 <li><code>Makefile</code></li>
 <li>language-specific files like <code>build.gradle</code> or <code>Rakefile</code></li>
 </ul>
-<p><strong>What's the cost of using immediate files?</strong></p>
-<p>They have to be maintained to avoid rot.</p>
-<p><strong>Is it hard to maintain immediate files?</strong></p>
-<p>No. PRs to an immediate file tend to be one line, one file affairs. <a href="https://codeascraft.com/2018/10/10/etsys-experiment-with-immutable-documentation">More involved systems</a> don't seem necessary.</p>
-<p><strong>Where can I go to learn more about documentation?</strong></p>
-<p>Stripe publishes a magazine on engineering and they have a whole issue on documentation <a href="https://increment.com/documentation/">here</a>.</p>
-<p>There's a good Hacker News thread on technical documentation <a href="https://news.ycombinator.com/item?id=20909783">here</a>.</p>
+<p><strong>What information should immediate provide?</strong></p>
+<blockquote>
+<p><a href="https://news.ycombinator.com/item?id=20910538">Examples. Realistic, complete, useful examples</a> that demonstrate the software being used in the manner it is intended.</p>
+<p>Glossary for any special terminology that can't just be googled - especially project specific terminology that may be confusing, and double especially terms or phrases which are used slightly differently to the way everybody else uses them (e.g. 'user' means something slightly different almost everywhere).</p>
+<p>Lots of "why" describing why the software behaves in ways that seem surprising at first glance.</p>
+</blockquote>
+<p><strong>Do immediate files have a tradeoff?</strong></p>
+<p>Yes; they have to be maintained.</p>

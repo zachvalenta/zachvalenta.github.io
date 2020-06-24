@@ -4,14 +4,21 @@
 <blockquote>
 <p><a href="https://selectstarsql.com/beazley.html">Avoid debugging by gut feel or trial and error</a></p>
 </blockquote>
-<h3>make your own checklist</h3>
+<h3>have a checklist</h3>
 <p>Atul Gawade's <a href="https://www.amazon.com/Checklist-Manifesto-How-Things-Right/dp/0312430000">The Checklist Manifesto</a> teaches us: </p>
 <ul>
 <li>checklists are incredibly useful</li>
 <li>the hardest part of a checklist is actually sticking to the checklist</li>
 </ul>
-<p>The first step to addressing both of those points is to actually have a checklist. For whatever reason, I've never seen anyone debug according to an explicit checklist, but I think it might be worthwhile. Here's my attempt at making one for myself.</p>
+<p>The first step to addressing both of those points is to actually have a checklist. For whatever reason, I've never seen anyone debug according to an explicit checklist, but I think it might be worthwhile. Here's why.</p>
+<h3>why have a checklist?</h3>
+<p>Having a checklist is better for your coworkers and yourself.</p>
+<ul>
+<li>If you need to enroll the help of a coworker or collaborator, you've got a list of things you've attempted and the results of those attempts. Plus, you've proof that you put effort and consideration into solving the problem on your own and therefore respect their time.</li>
+<li>As you document what you've tried, you'll regain some flow. Almost like TDD, make small assertions and record what happens. This mental hack wards off negativity, especially when the bug is above your current skill level.</li>
+</ul>
 <h3>my checklist</h3>
+<p>Here's my attempt at a personal checklist:</p>
 <ul>
 <li>read the error message, read the code</li>
 <li>if stuck, check out Duck Duck Go and Stack Overflow</li>
@@ -30,7 +37,6 @@
 <li>version interop: does the server require a certain client version (or vice versa)?</li>
 </ul></li>
 </ul>
-<p>If things get really dire, I take a walk and think about something else and then, when I'm back at my desk, ask myself <a href="https://jvns.ca/blog/2018/09/01/learning-skills-you-can-practice/">what do I <em>actually</em> know?</a></p>
 <h3>other advice</h3>
-<p>Another benefit of having a checklist is, if you need to enroll the help of a coworker or collaborator, you've got a list of things you've attempted and the results of those attempts. Plus, you've proof that you put effort and consideration into solving the problem on your own and therefore respect their time.</p>
+<p>If things get really dire, I take a walk and think about something else and then, when I'm back at my desk, ask myself <a href="https://jvns.ca/blog/2018/09/01/learning-skills-you-can-practice/">what do I <em>actually</em> know?</a></p>
 <p>p.s. Julia Evans has a bunch of <a href="https://jvns.ca/blog/2019/06/23/a-few-debugging-resources/">other debugging advice</a> that you should check out.</p>

@@ -1,0 +1,328 @@
+@import "fonts.css";
+
+:root {
+  --black: #090a06;
+  --dark-grey: #999;
+  --grey: #ccc;
+  --light-grey: #f6f6f6;
+  --white: white;
+  --blue: blue;
+  --light-blue: #eeeeff;
+}
+
+html {
+  font-family: "Iosevka Aile", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0px;
+  color: var(--black);
+  background-color: var(--white);
+}
+
+body {
+  padding: 20px 0;
+  margin: 0;
+}
+
+b,
+strong {
+  font-weight: 600;
+}
+
+a {
+  font-weight: 600;
+  background-color: var(--light-blue);
+}
+
+a:hover {
+  color: var(--black);
+  background-color: var(--grey);
+}
+
+header,
+main,
+footer {
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 720px;
+}
+
+footer {
+  margin-top: 20px;
+  max-width: 650px;
+}
+footer p {
+  font-size: 17px;
+  text-align: center;
+}
+
+#top-menu {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1ch;
+}
+#top-menu a {
+  color: transparent;
+  background-color: transparent;
+}
+
+#breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+#breadcrumbs li {
+  display: inline-block;
+  line-height: 1.5ch;
+  margin-left: 1.5ch;
+}
+#breadcrumbs a {
+  color: var(--black); /* necessary since visited state loads asynchronously */
+  background-color: transparent;
+  text-decoration: none;
+}
+#breadcrumbs a:visited {
+  color: var(--black);
+}
+#breadcrumbs a:hover {
+  background-color: var(--black);
+  color: var(--white);
+}
+#breadcrumbs [aria-current]:not([aria-current="false"]) {
+  font-style: italic;
+}
+
+#date {
+  padding-top: 1.5ch;
+}
+
+#content {
+}
+#content img {
+  width: 100%;
+}
+
+.bottom-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid;
+  border-top-color: var(--light-grey);
+}
+
+h1 {
+  font-family: "Iosevka Etoile", sans-serif;
+  letter-spacing: -1px;
+  line-height: 2ch;
+
+  margin: 0;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+h2 {
+  font-family: "Iosevka Etoile", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  padding-top: 0.5ch;
+}
+
+h3 {
+  font-family: "Iosevka Etoile", sans-serif;
+  font-size: 21px;
+  font-weight: 400;
+  font-style: italic;
+  padding-top: 0.5ch;
+}
+
+.post-abbrev-body {
+  margin-bottom: 20px;
+  padding: 1ch;
+  background-color: var(--light-grey);
+}
+.post-abbrev-date {
+  padding-bottom: 0.5ch;
+}
+.post-abbrev-link {
+  font-size: 24px;
+  padding-bottom: 0.5ch;
+}
+.post-abbrev-read-time {
+  font-style: italic;
+}
+
+p,
+li,
+label,
+.csl-bib-body {
+  line-height: 2.7ch;
+  hyphens: auto;
+}
+
+.edit {
+  font-size: 17px;
+  color: var(--blue);
+  background-color: white;
+  padding: 0px 20px;
+  margin: 20px -20px;
+  border: 2px solid var(--blue);
+}
+@media only screen and (max-width: 640px) {
+  .edit {
+    margin: 20px 0px;
+  }
+}
+
+#series {
+  font-size: 17px;
+  font-style: italic;
+}
+#series p {
+  margin: 0;
+}
+#series ul {
+  list-style-type: none;
+}
+#series .series-unpublished {
+  color: var(--grey);
+}
+
+blockquote p,
+blockquote ul,
+blockquote li {
+  font-size: 17px;
+  line-height: 2.5ch;
+}
+blockquote .footnote-ref {
+  font-size: 14px;
+}
+
+.verse {
+  font-size: 17px;
+  line-height: 2.5ch;
+  padding-left: 40px;
+}
+
+.footnotes-sep {
+  margin: 2ch 0;
+}
+
+sup {
+  line-height: 0;
+}
+
+code {
+  font-family: "Iosevka Fixed", monospace;
+  font-size: 17px;
+  padding: 2px;
+  margin: -2px;
+  hyphens: none;
+}
+:not(a) > code {
+  color: var(--black);
+  background-color: var(--light-grey);
+}
+code .keyword,
+code .tag {
+  font-weight: 600;
+}
+code .punctuation {
+  font-weight: 400;
+}
+code .comment {
+  font-style: italic;
+  color: var(--dark-grey);
+}
+
+pre {
+  padding: 10px 20px;
+  margin: 20px -20px;
+  background-color: var(--light-grey);
+  overflow-x: auto;
+  overflow-y: clip;
+  white-space: pre-wrap; /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+th {
+  text-align: left;
+}
+
+input {
+  font-family: "Iosevka Aile", serif;
+  font-size: 17px;
+}
+input#bd-email {
+  margin: 0.5ch 0 1ch 0;
+  width: 100%;
+  height: 3ch;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+#subscribe-form {
+  background-color: var(--light-grey);
+  padding: 1ch;
+  margin: 2ch 0;
+}
+
+@media only screen and (max-width: 800px) {
+  pre code {
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 750px) {
+  pre code {
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  pre code {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 660px) {
+  pre code {
+    font-size: 11px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  #content {
+    width: 100%;
+    padding: 0;
+  }
+  .bottom-nav {
+    font-size: 17px;
+  }
+  pre {
+    white-space: pre; /* Since CSS 2.1 */
+    white-space: -moz-pre; /* Mozilla, since 1999 */
+    white-space: -pre; /* Opera 4-6 */
+    white-space: -o-pre; /* Opera 7 */
+    word-wrap: normal; /* Internet Explorer 5.5+ */
+  }
+}
+
+.notopmargin,
+.notopmargin#subscribe-form {
+  margin-top: 0;
+}
